@@ -1,6 +1,6 @@
-import { View, Text, TextInput, TouchableHighlight } from "react-native";
-import React, { useState } from "react";
-import { colors, icons } from "@/constants";
+import { useState } from "react";
+import { TextInput, TouchableHighlight, View } from "react-native";
+import { colors, icons } from "../constants";
 
 const FormField = ({
 	value,
