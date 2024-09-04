@@ -1,12 +1,11 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { Text, View } from "react-native";
 
 const Recover = () => {
-  return (
-    <View>
-      <Text>Recover</Text>
-    </View>
-  )
-}
+	return (
+		<View>
+			<Text>Recover</Text>
+		</View>
+	);
+};
 
-export default Recover
+export default Recover;

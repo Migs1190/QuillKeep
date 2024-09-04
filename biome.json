@@ -1,0 +1,27 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "formatter": {
+    "enabled": true,
+    "indentWidth": 2,
+    "lineEnding": "crlf",
+    "attributePosition": "multiline"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "warn",
+        "noUnusedVariables": {
+          "level": "info",
+          "fix": "unsafe"
+        },
+        "noUndeclaredVariables": "warn",
+        "useExhaustiveDependencies": "off"
+      }
+    }
+  }
+}

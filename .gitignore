@@ -2,3 +2,7 @@ node_modules
 lib
 assets
 context
+VividRead_Functions
+.vscode
+.expo
+.expo/devices.json

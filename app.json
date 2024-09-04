@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Test hehe",
+    "name": "Vivid Read",
     "slug": "Balls",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -29,7 +29,7 @@
     },
     "plugins": [
       "expo-router",
-      "expo-asset"
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
