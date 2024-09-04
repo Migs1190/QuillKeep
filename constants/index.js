@@ -1,5 +1,5 @@
 import colors from "./colors";
-import styles from "./styles";
 import images from "./images";
+import styles from "./styles";
 
 export { colors, styles, images };
