@@ -1,30 +1,42 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Platform, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Platform, TextInput, View } from "react-native";
 import { colors, styles } from "../constants";
+import Picker from "./Picker";
 
-const Searchbar = ({ value, label, handleWrite = (f) => f }) => {
+const Searchbar = ({ handleWrite = (f) => f, option, setOption, loading }) => {
+	const debounce = (func, delay = 1000) => {
+		let timeOut;
+		return (...args) => {
+			clearTimeout(timeOut);
+			timeOut = setTimeout(() => {
+				func(...args);
+			}, delay);
+		};
+	};
+
+	const writeBrakes = debounce((val) => handleWrite(val));
+
 	return (
 		<View
-			className="h-14 bg-white flex-row rounded-lg my-2 border-[1px] border-gray-200"
+			className="h-14 bg-white flex-row rounded-lg mx-4 border-[1px] border-gray-200"
 			style={Platform.OS === "android" && styles.ShadowStyles.androidShadow}
 		>
 			<View className="flex-1">
 				<TextInput
-					value={value}
 					className="px-4 h-full font-robotolit text-base"
 					placeholder="Search for a book"
-					onChangeText={(value) =>
-						handleWrite((prev) => ({ ...prev, [label.toLowerCase()]: value }))
-					}
+					onChangeText={(value) => writeBrakes(value)}
 				/>
 			</View>
-			<TouchableOpacity className="px-4 py-2 justify-center items-center">
-				<FontAwesome
-					name="search"
-					size={24}
+			{loading && (
+				<ActivityIndicator
 					color={colors.SECONDARY}
+					className="mx-2"
 				/>
-			</TouchableOpacity>
+			)}
+			<Picker
+				option={option}
+				setOption={setOption}
+			/>
 		</View>
 	);
 };

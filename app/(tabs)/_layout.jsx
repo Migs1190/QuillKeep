@@ -16,7 +16,7 @@ const tabsContent = [
 		icon: "user-alt",
 	},
 	{
-		name: "search/[query]",
+		name: "search",
 		title: "Search",
 		header: false,
 		icon: "search",

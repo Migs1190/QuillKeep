@@ -25,17 +25,10 @@ const Home = () => {
 		useContext(GlobalContext);
 
 	useEffect(() => {
-		if (showScrollToTop) {
-			Animated.timing(btnPos, {
-				toValue: -280,
-				useNativeDriver: false,
-			}).start();
-		} else {
-			Animated.timing(btnPos, {
-				toValue: -400,
-				useNativeDriver: false,
-			}).start();
-		}
+		Animated.timing(btnPos, {
+			toValue: showScrollToTop ? -280 : -400,
+			useNativeDriver: false,
+		}).start();
 	}, [showScrollToTop]);
 
 	const onRefresh = async () => {

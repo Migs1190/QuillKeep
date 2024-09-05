@@ -22,10 +22,6 @@ export default function RootLayout() {
 						options={{ headerShown: false }}
 					/>
 					<Stack.Screen
-						name="search/[query]"
-						options={{ headerShown: false }}
-					/>
-					<Stack.Screen
 						name="book/[title]"
 						options={{ headerShown: false }}
 					/>
