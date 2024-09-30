@@ -1,52 +1,41 @@
-import { MaterialIcons } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Colors } from "@/constants";
 import { useContext } from "react";
-import { FlatList, Image, Text, View } from "react-native";
-import { images } from "../constants";
-import { colors } from "../constants";
+import { FlatList, Text, View } from "react-native";
 import { GlobalContext } from "../context/GlobalProvider";
 import CarouselItem from "./CarouselItem";
+import Logo from "./SVGs/Logo";
 import TrendingEmptyState from "./TrendingEmptyState";
 
-const TrendingCarousel = ({ data: books }) => {
-	const { userData } = useContext(GlobalContext);
-
+const TrendingCarousel = () => {
+	const { mode, userData, trendingBooks } = useContext(GlobalContext);
 	return (
-		<View className="">
-			<View className="flex-row justify-between items-center px-2">
+		<View>
+			<View className="flex-row justify-between items-center p-2">
 				<View className="ml-3">
-					<Text className="text-sm font-robotol">Weclome Back </Text>
-					<Text className="text-3xl text-secondary font-robotomit">
-						{userData.username}
+					<Text className="text-sm font-robotol dark:text-primary">
+						{userData ? "Welcome Back" : "Hello there,"}
+					</Text>
+					<Text
+						className="text-3xl font-robotomit"
+						style={{ color: Colors[mode].heading }}
+					>
+						{userData ? userData.username : "Guest"}
 					</Text>
 				</View>
-				<Image
-					source={{ uri: images.logo }}
-					resizeMode="contain"
-					className="w-24 h-24"
-				/>
+				<Logo color={Colors.tintDarker} />
 			</View>
-			<Link
-				href={"/trending"}
-				className="mt-5 mb-3"
+			<Text
+				className="ml-4 pb-5 pt-10 text-3xl font-robotomit"
+				style={{ color: Colors[mode].heading }}
 			>
-				<View className="flex-row items-center">
-					<Text className="ml-4 text-3xl font-robotobd text-secondary">
-						Trending
-					</Text>
-					<MaterialIcons
-						name="arrow-forward-ios"
-						size={24}
-						color={colors.SECONDARY}
-					/>
-				</View>
-			</Link>
+				Trending
+			</Text>
 			<View>
 				<FlatList
-					data={books}
+					data={trendingBooks}
 					keyExtractor={(item) => item.isbn}
 					horizontal
-					// showsHorizontalScrollIndicator={false}
+					showsHorizontalScrollIndicator={false}
 					renderItem={({ item }) => <CarouselItem item={item} />}
 					ListEmptyComponent={() => <TrendingEmptyState />}
 					contentContainerStyle={{
@@ -57,7 +46,12 @@ const TrendingCarousel = ({ data: books }) => {
 					maxToRenderPerBatch={2}
 				/>
 			</View>
-			<Text className="ml-4 pt-10 text-3xl font-robotol">Featured</Text>
+			<Text
+				className="ml-4 pb-5 pt-10 text-3xl font-robotomit"
+				style={{ color: Colors[mode].heading }}
+			>
+				Featured
+			</Text>
 		</View>
 	);
 };

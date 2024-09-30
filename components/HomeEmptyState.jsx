@@ -1,21 +1,23 @@
+import { Colors } from "@/constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useContext } from "react";
 import { Text, View } from "react-native";
-import { colors } from "../constants";
+import { GlobalContext } from "../context/GlobalProvider";
 
 const HomeEmptyState = () => {
+	const { mode } = useContext(GlobalContext);
 	return (
-		<View className="w-full flex-1 justify-center items-center">
+		<View className="flex-1 w-full justify-center items-center">
 			<MaterialCommunityIcons
 				name="book-cancel"
 				size={100}
-				color={colors.SHADES.lightGray}
+				color={Colors[mode].iconDefault}
 			/>
-			<Text className="text-xl text-p_gray-100 font-robotobd">
-				No Books Available
-			</Text>
-			<Text className="text-base text-p_gray-200 font-robotol">
-				Be the first to{" "}
-				<Text className="text-secondary font-robotomit">upload</Text>
+			<Text
+				className="text-xl dark:text-primary font-robotobd"
+				style={{ color: Colors[mode].iconDefault }}
+			>
+				No Books Available...
 			</Text>
 		</View>
 	);

@@ -1,112 +1,87 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import LoginLogo from "@/components/SVGs/LoginLogo";
 import { Link, router } from "expo-router";
-import { useState } from "react";
-import {
-	ActivityIndicator,
-	Alert,
-	Image,
-	Text,
-	TouchableHighlight,
-	View,
-} from "react-native";
+import { useContext, useState } from "react";
+import { Alert, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
-import { colors, images } from "../../constants";
+import SubmitButton from "../../components/SubmitButton";
+import CirclesBG from "../../components/SvgBgCircles";
+import { GlobalContext } from "../../context/GlobalProvider";
 import { signIn } from "../../lib/appwrite";
-
+import { Colors } from "@/constants";
 const SignIn = () => {
-	const [credentials, setcredentials] = useState({ email: "", password: "" });
-	const [isSubmitting, setIsSubmitting] = useState(false);
+	const { mode, fetchUserData } = useContext(GlobalContext);
+	const [credentials, setCredentials] = useState({ email: "", password: "" });
+	const [loadingSignIn, setLoadingSignIn] = useState(false);
 
-	const submitForm = async () => {
+	const submitSignIn = async () => {
 		if (credentials.email === "" || credentials.password === "")
 			return Alert.alert("Signing In", "Please fill in all fields");
 
-		setIsSubmitting(true);
+		setLoadingSignIn(true);
 		try {
 			await signIn({
 				email: credentials.email.trim().toLowerCase(),
 				password: credentials.password.trim(),
 			});
+			await fetchUserData();
 			router.replace("/home");
 		} catch (error) {
 			Alert.alert("Error in Sign in", error.message);
 		} finally {
-			setIsSubmitting(false);
+			setLoadingSignIn(false);
 		}
 	};
 
 	return (
-		<View className="w-full h-full justify-evenly px-5 bg-white">
+		<SafeAreaView className="w-full h-full justify-evenly px-5 bg-primary dark:bg-wood-smoke">
+			<CirclesBG />
 			<View className="items-center">
-				<Image
-					source={{ uri: images.logo }}
-					resizeMode="contain"
-					className="w-32 h-32"
-				/>
-				<Text className="text-2xl font-robotol">
-					Login to{" "}
-					<Text className="font-robotomit text-secondary">VividRead</Text>
-				</Text>
+				<LoginLogo />
 			</View>
 			<View>
 				<FormField
 					value={credentials.email}
 					label="Email"
-					palceholder="Email"
-					handleWrite={setcredentials}
+					placeholder="Email"
+					handleWrite={setCredentials}
 					keyboardType="email-address"
-					isDisabled={isSubmitting}
+					isDisabled={loadingSignIn}
 				/>
 				<FormField
 					value={credentials.password}
 					label="Password"
-					palceholder="Password"
-					handleWrite={setcredentials}
-					isDisabled={isSubmitting}
+					placeholder="Password"
+					handleWrite={setCredentials}
+					isDisabled={loadingSignIn}
 				/>
 				<Link
 					href="/recover"
-					className="ml-auto mt-4 text-xs font-robotom underline"
-					disabled={isSubmitting}
+					className="ml-auto mt-4 text-xs font-robotom underline dark:text-primary"
+					disabled={loadingSignIn}
 				>
 					Forgot your login details?
 				</Link>
 			</View>
-			<Text className="text-center font-robotol">
+			<Text className="text-center font-robotol dark:text-primary">
 				Don't have an account?
 				<Link
 					href="/sign-up"
-					className="text-base font-robotomit text-secondary"
-					disabled={isSubmitting}
+					className="text-base font-robotomit"
+					disabled={loadingSignIn}
+					style={{ color: Colors[mode].link }}
 				>
 					{" "}
 					Sign up
 				</Link>
 			</Text>
 			<View>
-				<TouchableHighlight
-					className="ml-auto w-20 h-20 justify-center items-center bg-secondary rounded-full"
-					onPress={submitForm}
-					underlayColor={colors.DARKER_SECONDARY}
-					disabled={isSubmitting}
-					style={{ elevation: 5 }}
-				>
-					{isSubmitting ? (
-						<ActivityIndicator
-							animating
-							size="large"
-							color="white"
-						/>
-					) : (
-						<FontAwesome
-							name="arrow-right"
-							size={24}
-							color="white"
-						/>
-					)}
-				</TouchableHighlight>
+				<SubmitButton
+					isDisabled={loadingSignIn}
+					pressAction={submitSignIn}
+				/>
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 };
 

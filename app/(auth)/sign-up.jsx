@@ -1,27 +1,25 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import SignUpLogo from "@/components/SVGs/SignUpLogo";
 import { Link, router } from "expo-router";
-import { useState } from "react";
-import {
-	ActivityIndicator,
-	Alert,
-	Image,
-	Text,
-	TouchableHighlight,
-	View,
-} from "react-native";
+import { useContext, useState } from "react";
+import { Alert, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
-import { colors, images } from "../../constants";
+import SubmitButton from "../../components/SubmitButton";
+import CirclesBG from "../../components/SvgBgCircles";
+import { GlobalContext } from "../../context/GlobalProvider";
 import { signUp } from "../../lib/appwrite";
+import { Colors } from "@/constants";
 
 const SignUp = () => {
-	const [credentials, setcredentials] = useState({
+	const { mode, fetchUserData } = useContext(GlobalContext);
+	const [credentials, setCredentials] = useState({
 		username: "",
 		email: "",
 		password: "",
 	});
-	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [loadingSignUp, setLoadingSignUp] = useState(false);
 
-	const submitForm = async () => {
+	const submitSignUp = async () => {
 		if (
 			credentials.username === "" ||
 			credentials.email === "" ||
@@ -29,65 +27,60 @@ const SignUp = () => {
 		)
 			return Alert.alert("Signing up", "Please fill in all fields");
 
-		setIsSubmitting(true);
+		setLoadingSignUp(true);
 		try {
 			await signUp({
 				email: credentials.email.trim().toLowerCase(),
 				password: credentials.password.trim(),
 				username: credentials.username.trim(),
 			});
+			await fetchUserData();
 			router.replace("/home");
 		} catch (error) {
 			Alert.alert("Error in Sign up", error.message);
 		} finally {
-			setIsSubmitting(false);
+			setLoadingSignUp(false);
 		}
 	};
 
 	return (
-		<View className="h-full flex-auto justify-evenly px-5 bg-white">
+		<SafeAreaView className="h-full flex-auto justify-evenly px-5 bg-primary dark:bg-wood-smoke">
+			<CirclesBG />
 			<View className="items-center">
-				<Image
-					source={{ uri: images.logo }}
-					resizeMode="contain"
-					className="w-32 h-32"
-				/>
-				<Text className="text-2xl font-robotol">
-					Sign up to{" "}
-					<Text className="font-robotomit text-secondary">VividRead</Text>
-				</Text>
+				<SignUpLogo />
 			</View>
 			<View>
 				<FormField
 					value={credentials.username}
 					label="Username"
-					palceholder="Username"
-					handleWrite={setcredentials}
-					isDisabled={isSubmitting}
+					placeholder="Username"
+					handleWrite={setCredentials}
+					isDisabled={loadingSignUp}
 				/>
 				<FormField
 					value={credentials.email}
 					label="Email"
-					palceholder="Email"
-					handleWrite={setcredentials}
+					placeholder="Email"
+					handleWrite={setCredentials}
 					keyboardType="email-address"
-					isDisabled={isSubmitting}
+					isDisabled={loadingSignUp}
 				/>
 				<FormField
 					value={credentials.password}
 					label="Password"
-					palceholder="Password"
-					handleWrite={setcredentials}
-					isDisabled={isSubmitting}
+					placeholder="Password"
+					handleWrite={setCredentials}
+					isDisabled={loadingSignUp}
 				/>
 			</View>
 			<View>
-				<Text className="text-center font-robotol">
+				<Text className="text-center font-robotol dark:text-primary">
 					Already have an account?
 					<Link
 						href="/sign-in"
-						className="text-base font-robotomit text-secondary"
-						disabled={isSubmitting}
+						className="text-base font-robotomit"
+						disabled={loadingSignUp}
+						style={{ color: Colors[mode].link }}
 					>
 						{" "}
 						Sign In
@@ -95,29 +88,12 @@ const SignUp = () => {
 				</Text>
 			</View>
 			<View>
-				<TouchableHighlight
-					className="ml-auto w-20 h-20 justify-center items-center bg-secondary rounded-full"
-					onPress={submitForm}
-					underlayColor={colors.DARKER_SECONDARY}
-					disabled={isSubmitting}
-					style={{ elevation: 5 }}
-				>
-					{isSubmitting ? (
-						<ActivityIndicator
-							animating
-							size="large"
-							color="white"
-						/>
-					) : (
-						<FontAwesome
-							name="arrow-right"
-							size={24}
-							color="black"
-						/>
-					)}
-				</TouchableHighlight>
+				<SubmitButton
+					isDisabled={loadingSignUp}
+					pressAction={submitSignUp}
+				/>
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 };
 

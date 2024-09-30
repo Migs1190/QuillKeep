@@ -1,6 +1,8 @@
+import { Colors } from "@/constants";
 import { Tabs } from "expo-router";
+import { useContext } from "react";
 import TabIcon from "../../components/TabIcon";
-import { colors } from "../../constants";
+import { GlobalContext } from "../../context/GlobalProvider";
 
 const tabsContent = [
 	{
@@ -22,12 +24,6 @@ const tabsContent = [
 		icon: "search",
 	},
 	{
-		name: "notifications",
-		title: "Notifications",
-		header: false,
-		icon: "bell",
-	},
-	{
 		name: "settings",
 		title: "Settings",
 		header: false,
@@ -36,6 +32,7 @@ const tabsContent = [
 ];
 
 const TabsLayout = () => {
+	const { mode } = useContext(GlobalContext);
 	return (
 		<Tabs
 			screenOptions={{
@@ -44,9 +41,9 @@ const TabsLayout = () => {
 				tabBarInactiveTintColor: "gray",
 				tabBarStyle: {
 					height: 60,
-					backgroundColor: "white",
+					backgroundColor: Colors[mode].background,
 					borderTopWidth: 1,
-					borderTopColor: colors.SECONDARY,
+					borderTopColor: Colors.tint,
 				},
 			}}
 		>

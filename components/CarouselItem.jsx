@@ -24,8 +24,8 @@ const CarouselItem = ({ item }) => {
 				<View className="flex-1">
 					<Text
 						className="text-base text-white font-robotocnit"
-						numberOfLines={2}
 						ellipsizeMode="tail"
+						numberOfLines={2}
 					>
 						{item.title}
 					</Text>

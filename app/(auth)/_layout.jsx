@@ -12,6 +12,18 @@ const Auth = () => {
 				name="sign-up"
 				options={{ headerShown: false }}
 			/>
+			<Stack.Screen
+				name="recover"
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="recover-pending"
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="recover-done"
+				options={{ headerShown: false }}
+			/>
 		</Stack>
 	);
 };

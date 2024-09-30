@@ -1,13 +1,14 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { colors } from "../constants";
 import GlobalProvider from "../context/GlobalProvider";
+import { Colors } from "@/constants";
 
 export default function RootLayout() {
 	return (
 		<GlobalProvider>
 			<SafeAreaProvider>
+				<StatusBar backgroundColor={Colors.tint} />
 				<Stack>
 					<Stack.Screen
 						name="index"
@@ -25,8 +26,11 @@ export default function RootLayout() {
 						name="book/[title]"
 						options={{ headerShown: false }}
 					/>
+					<Stack.Screen
+						name="(settings)/appearance-settings"
+						options={{ headerShown: false }}
+					/>
 				</Stack>
-				<StatusBar backgroundColor={colors.SECONDARY} />
 			</SafeAreaProvider>
 		</GlobalProvider>
 	);

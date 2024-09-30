@@ -16,8 +16,8 @@ const BookItem = memo(
 			<View
 				className={props}
 				style={{
-					width: cardWidth,
 					height: cardHeight,
+					width: cardWidth,
 				}}
 			>
 				<Link
@@ -33,7 +33,7 @@ const BookItem = memo(
 				</View>
 				<View className="h-10 pt-1">
 					<Text
-						className="text-center text-base font-robotocn leading-5"
+						className="text-center text-base dark:text-primary font-robotocn leading-5"
 						numberOfLines={numOfLines}
 						ellipsizeMode="tail"
 					>

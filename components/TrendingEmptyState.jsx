@@ -1,21 +1,23 @@
+import { Colors } from "@/constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useContext } from "react";
 import { Text, View } from "react-native";
-import { colors } from "../constants";
+import { GlobalContext } from "../context/GlobalProvider";
 
 const TrendingEmptyState = () => {
+	const { mode } = useContext(GlobalContext);
 	return (
 		<View className="w-full justify-center items-center">
 			<MaterialCommunityIcons
 				name="book-alert"
 				size={100}
-				color={colors.SHADES.gray}
+				color={Colors[mode].iconDefault}
 			/>
-			<Text className="text-xl text-gray-500 font-robotobd">
+			<Text
+				className="text-xl dark:text-primary font-robotobd"
+				style={{ color: Colors[mode].iconDefault }}
+			>
 				No Books Trending...
-			</Text>
-			<Text className="text-base text-gray-500 font-robotol">
-				Be the first to{" "}
-				<Text className="text-secondary font-robotomit">upload</Text>
 			</Text>
 		</View>
 	);

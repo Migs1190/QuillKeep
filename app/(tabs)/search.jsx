@@ -1,19 +1,21 @@
+import { useContext, useEffect, useState } from "react";
+import { Dimensions, FlatList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SearchBar from "../../components/SearchBar";
-import { useContext, useEffect, useState } from "react";
-import { searchBooks } from "../../lib/appwrite";
-import { Dimensions, FlatList, Text, View } from "react-native";
-import BookItem from "../../components/bookItem";
 import SearchEmptyState from "../../components/SearchEmptyState";
-import { GlobalContext } from "../../context/GlobalProvider";
+import CirclesBG from "../../components/SvgBgCircles";
+import BookItem from "../../components/bookItem";
+import { searchBooks } from "../../lib/appwrite";
+import { Colors } from "@/constants";
+import { GlobalContext } from "@/context/GlobalProvider";
 
 const Search = () => {
+	const { mode } = useContext(GlobalContext);
 	const WIDTH = Dimensions.get("window").width;
 	const [option, setOption] = useState("Title");
 	const [searchedData, setSearchedData] = useState(null);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [loading, setLoading] = useState(false);
-	const { booksData: books } = useContext(GlobalContext);
 
 	useEffect(() => {
 		setLoading(true);
@@ -31,7 +33,8 @@ const Search = () => {
 	}, [searchQuery]);
 
 	return (
-		<SafeAreaView className="bg-white flex-1 justify-start pt-10">
+		<SafeAreaView className="bg-primary dark:bg-wood-smoke flex-1 justify-start pt-10 ">
+			<CirclesBG />
 			<SearchBar
 				handleWrite={setSearchQuery}
 				option={option}
@@ -46,7 +49,7 @@ const Search = () => {
 					contentContainerStyle={{
 						width: WIDTH,
 					}}
-					data={searchedData ?? books ?? []}
+					data={searchedData ?? []}
 					keyExtractor={(item) => item.isbn}
 					renderItem={({ item }) => (
 						<BookItem
@@ -58,10 +61,13 @@ const Search = () => {
 					)}
 					ListEmptyComponent={() => <SearchEmptyState />}
 					ListHeaderComponent={() => (
-						<Text className="pt-10 pb-2 text-xl text-gray-500 font-robotocnit">
+						<Text
+							className="pt-10 pb-2 text-xl font-robotocnit"
+							style={{ color: Colors[mode].text }}
+						>
 							Found (
-							<Text className="text-secondary">
-								{searchedData ? searchedData?.length : books?.length}
+							<Text style={{ color: Colors[mode].heading }}>
+								{searchedData?.length ?? 0}
 							</Text>
 							) Books
 						</Text>
