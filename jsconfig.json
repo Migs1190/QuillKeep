@@ -1,0 +1,16 @@
+{
+ "compilerOptions": {
+  "strict": true,
+  "paths": {
+   "@/*": [
+    "./*"
+   ],
+   "@fonts/*": [
+    "./assets/fonts/*"
+   ],
+   "@components/*": [
+    "./components/*"
+   ]
+  }
+ }
+}

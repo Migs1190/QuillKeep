@@ -1,6 +1,6 @@
-# vividRead
+# Quill Keep
 
-vividRead is a modern book reading app designed to provide an immersive reading experience. With vividRead, you can easily manage your book collection, track your reading progress, and enjoy a variety of customization options to enhance your reading experience.
+QuillKeep is a modern book reading app designed to provide an immersive reading experience. With QuillKeep, you can easily manage your book collection, track your reading progress, and enjoy a variety of customization options to enhance your reading experience.
 
 ## Features
 
@@ -9,16 +9,15 @@ vividRead is a modern book reading app designed to provide an immersive reading 
 - **Bookmarking**: Save your favorite pages and chapters.
 - **Progress Tracking**: Keep track of your reading progress.
 - **Library Management**: Organize your books into categories and collections.
-- **Offline Reading**: Download books for offline access.
 - **Search Functionality**: Quickly find books and specific content within books.
 
 ## Installation
 
-To install vividRead, follow these steps:
+To install QuillKeep, follow these steps:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/vividRead.git
+   git clone https://github.com/yourusername/quillkeep.git
    ```
 2. Install the required dependencies:
    ```sh
@@ -39,7 +38,7 @@ To install vividRead, follow these steps:
 
 ## Contributing
 
-Contributions to vividRead are welcome! To contribute, please follow these steps:
+Contributions to QuillKeep are welcome! To contribute, please follow these steps:
 
 1. Fork the repository.
 2. Create a new branch:
@@ -62,4 +61,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-For any questions or suggestions, please contact me at support@vividread.com.
+For any questions or suggestions, please contact me at support@QuillKeep.com.

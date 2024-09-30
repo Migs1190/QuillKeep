@@ -1,5 +1,4 @@
-import colors from "./colors";
-import images from "./images";
-import styles from "./styles";
+import Colors from "./Colors";
+import Styles from "./Styles";
 
-export { colors, styles, images };
+export { Colors, Styles };

@@ -20,7 +20,11 @@
           "fix": "unsafe"
         },
         "noUndeclaredVariables": "warn",
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "useJsxKeyInIterable": "warn"
+      },
+      "suspicious": {
+        "noArrayIndexKey": "off"
       }
     }
   }

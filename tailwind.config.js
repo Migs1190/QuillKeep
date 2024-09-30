@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+	darkMode: [""],
 	content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
 	theme: {
 		extend: {
 			colors: {
-				primary: "#161622",
+				primary: "#fff",
 				secondary: "#FF4023",
+				"mine-shaft": "#2a2a2a",
+				"wood-smoke": "#161A1B",
+				shark: "#1C2022",
 			},
 			fontFamily: {
 				robotob: ["Roboto-Black", "sans-serif"],

@@ -1,35 +1,33 @@
 {
   "expo": {
-    "name": "Vivid Read",
-    "slug": "Balls",
+    "name": "QuillKeep",
+    "slug": "QuillKeep",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "",
-    "scheme": "myapp",
+    "icon": "./assets/images/icon.png",
+    "scheme": "qk",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "https://cloud.appwrite.io/v1/storage/buckets/66c13d1a001267b868cd/files/66d4b000001a05bd22a6/view?project=66c1378a00165aaa1784&mode=admin",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": ""
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.company.vviidread"
+      }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": ""
+      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
-      "expo-font"
+      "expo-router"
     ],
     "experiments": {
       "typedRoutes": true
